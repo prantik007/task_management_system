@@ -36,7 +36,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/users").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers("/api/users/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
                                 .requestMatchers("/api/projects/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
-
+                                .requestMatchers("/api/tasks/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
                                 .anyRequest().authenticated()
 
         )
@@ -55,10 +55,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    /*
-     * Authentication provider configuration
-     * Links UserDetailsService and PasswordEncoder
-     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -67,10 +63,6 @@ public class SecurityConfig {
         return provider;
     }
 
-    /*
-     * Authentication manager bean
-     * Required for programmatic authentication (e.g., in /generateToken)
-     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

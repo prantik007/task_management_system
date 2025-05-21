@@ -12,6 +12,5 @@ import lombok.NoArgsConstructor;
 public class NewProjectDTO {
 
     private String name;
-    private long projectId;
 
 }

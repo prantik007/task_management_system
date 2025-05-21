@@ -58,8 +58,6 @@ public class ProjectService {
         project.setName(projectDTO.getName());
         project.setUser(user);
         
-
-        //project.setUser();
         Task defaultTask = Task
                 .builder()
                 .name("Default Task")
@@ -67,7 +65,6 @@ public class ProjectService {
                 .build();
 
         project.setTasks(Set.of(defaultTask));
-
 
         Project savedProject = projectRepository.save(project);
 
@@ -85,7 +82,6 @@ public class ProjectService {
 
         if(project.isEmpty())
             throw new RuntimeException("Invalid Project Id");
-
 
         if(project.get().getUser().getId() != user.get().getId())
             throw new RuntimeException("You are not authorized to add task to this project!");
